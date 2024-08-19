@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'vsevo.world'
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+apply plugin: "java"
+ext {
+    javaMainClass = "vsevo.world.Main"
+}
+
+jar {
+    archiveBaseName = "ip-counter"
+    manifest {
+        attributes "Main-Class": javaMainClass
+    }
+}
+application {
+    mainClassName = javaMainClass
+}
+
+test {
+    minHeapSize = "4500m"
+    maxHeapSize = "8192m"
+    useJUnitPlatform()
+}
